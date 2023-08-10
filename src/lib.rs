@@ -34,12 +34,15 @@ pub fn find_factors_sieve(num: usize, primes: &[usize]) -> Vec<usize> {
     let mut n: usize = num;
     let mut factors: Vec<usize> = vec![];
     for prime in primes {
-        if *prime > n { break; }
+        if *prime > n {
+            break;
+        }
         while n % *prime == 0 {
             factors.push(*prime);
             n /= *prime;
         }
     }
+    if n != 1 { factors.push(n); } // Not guaranteed to be prime!
     factors.sort();
     factors
 }
