@@ -30,6 +30,20 @@ pub fn multiply_vector(values: &[usize]) -> usize {
         .fold(1, |a, b| a * b)
 }
 
+pub fn find_factors_sieve(num: usize, primes: &[usize]) -> Vec<usize> {
+    let mut n: usize = num;
+    let mut factors: Vec<usize> = vec![];
+    for prime in primes {
+        if *prime > n { break; }
+        while n % *prime == 0 {
+            factors.push(*prime);
+            n /= *prime;
+        }
+    }
+    factors.sort();
+    factors
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -119,6 +133,20 @@ mod tests {
             let factors = find_factors(i);
             let product = multiply_vector(&factors);
             assert_eq!(i, product);
+        }
+    }
+
+    #[test]
+    fn test_find_factors_sieve() {
+        let primes: Vec<usize> = vec![
+            2usize, 3usize, 5usize, 7usize, 11usize, 13usize, 17usize, 19usize, 23usize, 29usize, 31usize,
+            37usize, 41usize, 43usize, 47usize, 53usize, 59usize, 61usize, 67usize, 71usize, 73usize,
+            79usize, 83usize, 89usize, 97usize,
+        ];
+        for i in 2..100 {
+            let p1 = find_factors(i);
+            let p2 = find_factors_sieve(i, &primes);
+            assert_eq!(p1, p2);
         }
     }
 }
