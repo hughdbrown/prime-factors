@@ -21,6 +21,7 @@ pub fn find_factors(num: usize) -> Vec<usize> {
         }
     }
     if n != 1 {factors.push(n);}
+    factors.sort();
     factors
 }
 
@@ -79,6 +80,31 @@ mod tests {
     fn factors_60() {
         let result = find_factors(60);
         assert_eq!(result, vec![2, 2, 3, 5]);
+    }
+
+    #[test]
+    fn factors_312680865509917() {
+        let result = find_factors(312680865509917);
+        //assert_eq!(result, vec![40129483, 45339457]);
+        assert_eq!(result, vec![7791799, 40129483]);
+    }
+
+    #[test]
+    fn factors_12345678901234() {
+        let result = find_factors(12345678901234);
+        assert_eq!(result, vec![2, 7, 73, 12079920647]);
+    }
+
+    #[test]
+    fn factors_64374108854777() {
+        let result = find_factors(64374108854777);
+        assert_eq!(result, vec![64374108854777]);
+    }
+
+    #[test]
+    fn factors_6795742697625173() {
+        let result = find_factors(6795742697625173);
+        assert_eq!(result, vec![6880691, 987654103]);
     }
 
     #[test]
