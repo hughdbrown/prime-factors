@@ -24,6 +24,11 @@ pub fn find_factors(num: usize) -> Vec<usize> {
     factors
 }
 
+pub fn multiply_vector(values: &[usize]) -> usize {
+    values.iter()
+        .fold(1, |a, b| a * b)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -74,5 +79,20 @@ mod tests {
     fn factors_60() {
         let result = find_factors(60);
         assert_eq!(result, vec![2, 2, 3, 5]);
+    }
+
+    #[test]
+    fn factors_2_3_5() {
+        let result = multiply_vector(&[2usize, 3usize, 5usize]);
+        assert_eq!(result, 30);
+    }
+
+    #[test]
+    fn factors_general() {
+        for i in 1..1000 {
+            let factors = find_factors(i);
+            let product = multiply_vector(&factors);
+            assert_eq!(i, product);
+        }
     }
 }
