@@ -122,6 +122,12 @@ mod tests {
     }
 
     #[test]
+    fn factors_44711100255155897() {
+        let result = find_factors(44711100255155897);
+        assert_eq!(result, vec![45269999, 987654103]);
+    }
+
+    #[test]
     fn factors_2_3_5() {
         let result = multiply_vector(&[2usize, 3usize, 5usize]);
         assert_eq!(result, 30);
