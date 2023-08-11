@@ -6,34 +6,10 @@ use prime_factors::{
     multiply_vector,
 };
 
-// Build a sieve of Eratosthenes.
-pub fn sieve_of_eratosthenes(max: usize) -> Vec<bool> {
-    if max == 0 {return vec![false]};
-    if max == 1 {return vec![false, false]};
-
-    let mut values = vec![true; max + 1];
-    values[0] = false;
-    values[1] = false;
-    let upper: usize = ((max as f64).sqrt() as usize) + 1;
-    for i in 2..upper {
-        if values[i] {
-            // println!("-----\nSweeping {i}");
-            for j in ((i*i)..=max).step_by(i) {
-                // println!("Marking {j}");
-                values[j] = false;
-            }
-        }
-    }
-    values
-}
-
-pub fn sieve_to_primes(sieve: &[bool]) -> Vec<usize> {
-    sieve.iter()
-        .enumerate()
-        .filter(|pair| *pair.1) // Include pair if prime flag is true
-        .map(|pair| pair.0) // Change type by passing on only the usize position/prime-number
-        .collect::<Vec::<usize>>()
-}
+use sieve::{
+    sieve_of_eratosthenes,
+    sieve_to_primes,
+};
 
 
 // We'll use primes up to this value.
